@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>READ DA QUOTES</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/app.css">
+</head>
+<body>
+<section class="main-content">
+	<div class="row hero">
+		<div class="columns small-12 medium-12">
+			<h1>Welcome to Da Quotes</h1>
+	        <h2>Select a person and we'll show ye his finest quotes</h2>
+	        <blockquote>
+		        "You never know the value of a quote, till you try to make one up"
+		        <cite>Flask Developer</cite>
+	        </blockquote>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="columns small-12 medium-12 large-8">
+			<form class="quotes-form" action="{{ url_for('index') }}">
+				<div class="row">
+					<div class="columns large-6">
+						<label>
+							Person
+							<input type="text" name="person" value="{{ person }}">
+						</label>
+					</div>
+					<!-- /col6 -->
+
+					<div class="columns large-6">
+						<label>
+							Number of Quotes
+							<select name="limit">
+								<option value="all">All</option>
+								<option {% if limit == '1' %}selected{%endif%}>1</option>
+								<option {% if limit == '2' %}selected{%endif%}>2</option>
+								<option {% if limit == '3' %}selected{%endif%}>3</option>
+							</select>
+						</label>
+					</div>
+					<!-- /col6 -->
+
+				</div>
+				<!-- /row -->
+
+				<div class="row">
+					<div class="columns large-12">
+						<button type="submit" class="button expand">Serve me sum quotes!</button>
+					</div>
+				</div>
+			</form>
+			<!-- /quotes-form -->
+
+			{% if person %} 
+				<h2>Quotes by "{{ person.title() }}"</h2>
+
+				{% if quotes %} 
+				<div class="quotes-container">
+					{% for quote in quotes %}
+					<hr>
+					<blockquote>
+						{{ quote }}	
+					</blockquote>
+					{% endfor %}
+				</div>
+				{% else %}
+				<h5>
+					Unfortunately we have no quotes by this person currently. 😔
+					<br>
+					Try searching for: <code>drake</code>, <code>trump</code>, <code>alicia keys</code>, <code>abel tesfaye</code>, <code>buhari</code> instead.
+				</h5>
+				{% endif %} 
+			{% endif %}	
+		</div>
+		<!-- /large8 -->
+
+	</div>
+	<!-- /row -->
+
+	
+</section>
+	
+
+</body>
+</html>
