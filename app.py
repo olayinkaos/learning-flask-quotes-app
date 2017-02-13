@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 def getQuotes(person, limit):
 	try:
-		person = person.lower()
-		person = person.replace(' ', '_')
+		person = person.lower().replace(' ', '_')
 		quotes = PERSONS.get(person)
 		if limit and limit != '0':
 			try:
